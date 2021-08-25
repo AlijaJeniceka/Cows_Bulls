@@ -1,5 +1,6 @@
 package com.company.game_users;
 
+import com.company.Game.Game;
 import com.company.dbhelper.dbConnection;
 
 import java.sql.PreparedStatement;

@@ -60,7 +60,7 @@ public class CowsAndBulls {
         return new int[] {bulls, cows};
     }
     //a method that manages the game play with the UI with Swing
-    private void play() {
+    public void play() {
         JFrame frame = new JFrame("Bulls and Cows on SSaurel");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Container contentPane = frame.getContentPane();
@@ -170,7 +170,7 @@ public class CowsAndBulls {
         textPane.setText("You must guess a 4-digits number with no duplicate digits");
         textField.setText("");
     }
-    public static void main(String[] args) {
+    public static void main() {
         CowsAndBulls cowsAndBulls = new CowsAndBulls();
 
         SwingUtilities.invokeLater(new Runnable() {

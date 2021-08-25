@@ -1,11 +1,15 @@
 package com.company.Game;
 
+import com.company.dbhelper.dbConnection;
 import com.company.game_users.Users_controller;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class Game implements ActionListener {
     private static JLabel userLabel, userNameLabel, repeatPsLabel, accountLabel;
@@ -122,11 +126,30 @@ public class Game implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        PreparedStatement ps;
+        ResultSet rs;
         String user = userText.getText();
         String password = passwordText.getText();
-        System.out.println(user + ", " + password);
+      //  System.out.println(user + ", " + password);
+        try {
+            ps = dbConnection.getConnection().prepareStatement("SELECT * FROM CowsAndBulls WHERE username='" + user + "';");
+            rs = ps.executeQuery();
 
-        if(user.equals("Sandija") && password.equals("Sandija123")) {
+            String passwordCheck="";
+            while (rs.next()) {
+                passwordCheck = rs.getString("password");
+
+            }
+          //  System.out.println("Successfully login. ");
+
+
+        } catch (SQLException a) {
+            // e.printStackTrace();
+          //  System.out.println("Unable to login, try again. ");
+
+        }
+
+     //   if(user.equals("Sandija") && password.equals("Sandija123")) {
 
             JFrame frame2 = new JFrame();
             JPanel panel2 = new JPanel();
@@ -145,7 +168,8 @@ public class Game implements ActionListener {
             button3.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                  // How to add such action to this button so that player would get to the game
+                  CowsAndBulls.main();
+                    // How to add such action to this button so that player would get to the game
                   //  after clicking on Start new game?
                 }
             });
@@ -167,4 +191,4 @@ public class Game implements ActionListener {
         }
 
     }
-}
+
